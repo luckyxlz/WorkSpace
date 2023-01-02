@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkSpace</title>
+  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <link rel="stylesheet" href="./css/index.css">
+  
+</head>
+<body>
+
+  
+  <div id="app">
+    <!-- header -->
+    <header>
+      <div class="title" v-bind:class="{ todoBGColor: show=='todo', noteBGColor: show=='note', todoColor: show=='todo', noteColor: show=='note' }">
+        <h4>{{show}}</h4>  
+      </div>
+      <div class="switch">
+        <div v-on:click="showTodo">
+         <h5>todo</h5>
+        </div>
+        <div v-on:click="showNote">
+          <h5>note</h5>
+        </div>
+      </div>
+    </header>
+    <!-- content -->
+    <div class="content" v-bind:class="{todoBGColor: show=='todo', noteBGColor: show=='note'}">
+      <div v-show="show=='todo'" class="box">
+        <ul>
+          <li v-for="n in todoLength" :key="n.index">
+            <todoitem></todoitem>
+          </li> 
+        </ul>
+      </div>
+      <div v-show="show=='note'" class="box">
+        <ul>
+          <li v-for="n in noteNum" :key="n.index">
+            <noteItem></noteItem>
+          </li> 
+        </ul>
+      </div>
+    </div>
+    <footer v-bind:class="{todoBGColor: show=='todo', noteBGColor: show=='note'}">
+      <div v-if="show=='todo'" v-on:click="addItem" class="add"> 
+        <div>+</div>
+      </div>
+      <div v-if="show=='note'" v-on:click="writeNote" class="write"> 
+        <img src="./assest/pen.png" alt="">
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // 定义一个组件
+    Vue.component('todoitem', {
+      // 组件数据
+      data: function () {
+        return {
+          text:'',
+          status:false,
+          edit:true
+        }
+      },
+      // 组件方法
+      methods:{
+        setEditFalse(event) {
+          // 当触发回车事件的时候执行失去焦点
+          if (event.key == "Enter"){
+            event.target.blur();
+            return;
+          }
+          // 修改编辑状态
+          this.edit = false;
+          if (this.$refs.input.value == ''){
+            this.$root.todoLength -= 1;
+          }
+          },
+        setEditTrue(){
+          this.edit = true;
+
+          // 当再次点击时，获取焦点
+          let that = this;
+          setTimeout(function(){
+            if (that.edit == true){
+              that.$refs.input.focus();
+            }
+          },0)
+        }
+        },
+
+      mounted(){
+        // 挂载后获取焦点
+        input = this.$refs.input.focus();
+      },
+      // 组件模版
+      template:  `
+      <div class="todoItem">
+        <input class="checkbox" type="checkbox" name="" id="" v-model="status">
+        <h4 @dblclick="setEditTrue" v-show="!edit" class="text">{{text}}</h4>
+        <input ref="input" v-show="edit" type="text" v-model="text" class="input_text" @blur="setEditFalse" @keypress.enter="setEditFalse" placeholder="请输入内容">
+      </div>`,
+    });
+
+
+    // 定义组件
+    Vue.component('noteitem',{
+      data: function(){
+        return {
+          text: "",
+          edit: true
+        }
+      },
+      template: `
+      <div class="todoItem">
+          <h4 @dblclick="setEditTrue"v-show="!edit" class="noteText">{{text}}</h4>
+          <textarea @keydown="save" v-show="edit == true" ref="noteInput" class="writeArea" v-model="text" @blur="savenote"/>
+      </div>`,
+      methods:{
+        savenote(){
+          this.edit = false;
+
+          if (this.$refs.noteInput.value == ''){
+            this.$root.noteNum -= 1;
+          }
+        },
+        setEditTrue(){
+          this.edit = true;
+          let that = this;
+          setTimeout(function(){
+            if (that.edit == true){
+              that.$refs.noteInput.focus();
+            }
+          },0)
+        },
+        save(e){
+          // e.preventDefault();
+          if(e.metaKey&&e.keyCode===83){
+            this.savenote();
+          }
+        }
+      },
+      mounted(){
+        this.$refs.noteInput.focus();
+      }
+    });
+
+    var app = new Vue({
+      // 挂载点
+      el: '#app',
+      // 数据
+      data: {
+        show:"todo",
+        todoLength:0,
+        noteNum:0
+      },
+      // 定义方法
+      methods:{
+        showTodo(){
+          // 展示todo页面的内容
+          this.show = "todo"
+        },
+        showNote(){
+          // 展示note页面的内容
+          this.show = "note"
+        },
+        // 添加Item
+        addItem(){
+          this.todoLength++;
+        },
+        writeNote(){
+          this.noteNum++;
+        }
+      }
+    })
+  </script>
+</body>
+</html>

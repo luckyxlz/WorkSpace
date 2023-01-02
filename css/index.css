@@ -1,0 +1,229 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    font-family: Helvetica;
+  }
+  body{
+    width: 400px;
+    height: 400px;;
+    background-color: #1d1d1d;
+
+  }
+  body::-webkit-scrollbar{
+      display: none;
+  }
+  /* header */
+  header{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 96%;
+    height: 80px;
+    margin: 0px 9px;
+  }
+  .title{
+      width: 100%;
+      height: 48px;
+      margin: 6px 0px 0px 0px;
+      border-radius: 10px 10px 0 0;
+  }
+  .title h4{
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    font-size: 30px;
+    line-height: 56px;
+    font-style: italic;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .switch{
+    width: 100%;
+    height: 20px;
+  }
+  .switch>div{
+    float: left;
+    width: 50%;
+    height: 100%;
+  }
+  .switch>div:nth-of-type(1){
+    border-radius: 0 0 0 4px;
+    background-color: rgb(172, 178, 183 );
+    color: #eee;
+;
+  }
+  .switch>div:nth-of-type(2){
+      background-color: rgb(128, 128, 114);
+      border-radius: 0 0 4px 0px;
+  }
+  .switch h5{
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    font-size: 16px;
+    text-transform: capitalize;
+  }
+
+  /* content */
+  .content{
+    position: absolute;
+    top: 80px;
+    left: 9px;
+    width: 96%;
+    height: 273px;
+    background-color: rgb(77, 79, 82);
+    border-radius: 9px;
+    overflow: scroll;
+  }
+  .content::-webkit-scrollbar{
+    display: none;;
+  }
+  .box{
+    width: 100%;
+    height: 100%;
+  }
+  .todoBGColor{
+    background-color: rgb(77, 79, 82);
+    transition: 1s background-color linear;
+  }
+  .noteBGColor{
+    background-color: rgb(188 146 85);
+    transition: 1s background-color linear;;
+  }
+  .todoColor{
+    color: #eee;
+  }
+  .noteColor{
+    color: #111;
+  }
+  .todoItem{
+    width: 100%;
+    height:50px;
+    border-bottom: 1px solid silver;
+    animation: addTodoItem 0.8s;
+    
+  }
+
+  .checkbox{
+    appearance: none;
+    position: relative;
+    float: left;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    border: 2px solid silver;
+    margin: 15px;
+    background-color: #fff;
+  }
+  .checkbox::before{
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    left: 10%;
+    top: 10%;
+    border-radius: 8px;
+    background-color: royalblue;
+    visibility: hidden;
+  }
+  .checkbox:checked::before{
+    visibility: visible;
+  }
+  .input_text{
+    float: left;
+    width: 300px;
+    height: 40px;
+    border: 2px royalblue solid;
+    font-size: 15px;
+    line-height: 40px;
+    margin: 5px 0px;
+    color: #eee;
+    background: rgba(256, 256, 256, 0.1);
+    caret-color: rgb(161, 222, 202);
+  }
+  .text{
+    float: left;
+    width: 300px;
+    height: 40px;
+    font-size: 20px;
+    line-height: 40px;
+    margin: 5px 0px;
+    color: white;
+    font-family: Helvetica;
+  }
+  .writeArea{
+    appearance: none;
+    resize: none;
+    position: absolute;
+    left: 30px;
+    top: 10px;
+    width: 330px;
+    height: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #cbb48f;
+    font-size: 20px;
+  }
+  .todoItem{
+    width: 100%;
+    height:50px;
+    border-bottom: 1px solid silver;
+  }
+  .noteText{
+    width: 100%;
+    height:50px;
+    font-size: 20px;
+    line-height: 50px;
+    margin: 0px 10px;
+    color: black;
+  }
+
+  .active{
+    background-color: #fff;
+  }
+
+  /* footer */
+  footer{
+    position: fixed;
+    bottom: 6px;
+    left: 9px;
+    height: 35px;
+    width: 96%;
+    border-radius: 5px;
+  }
+  .add{
+    height: 50%;
+    width: 17.5px;
+    margin: 10px;
+    border-radius: 10px;
+    float: right;
+    background-color:dodgerblue;
+    cursor: pointer;
+  }
+  .add>div{
+      width: 100%;
+      height: 100%;
+      font-size: 25px;
+      margin: -4px 1.5px;
+      line-height: 20px;
+      color: white;
+  }
+  .write{
+    height: 50%;
+    width: 17.5px;
+    margin: 10px;
+    float: right;
+    cursor: pointer;
+  }
+  .write>img{
+    width: 100%;
+    height: 100%;
+  }
+
+  /* addTodoItem的动画 */
+  @keyframes addTodoItem{
+    from {opacity:  0.2;}
+    to {opacity: 1;}
+}

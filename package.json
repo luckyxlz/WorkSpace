@@ -1,0 +1,45 @@
+{
+  "name": "menubar",
+  "version": "2.0.17",
+  "description": "high level way to create menubar desktop applications with atom-shell",
+  "main": "myApp.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxogden/menubar.git"
+  },
+  "scripts": {
+    "test": "standard",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "keywords": [
+    "atom",
+    "atom",
+    "shell",
+    "menubar",
+    "menu",
+    "mac",
+    "app"
+  ],
+  "author": "max ogden",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/maxogden/menubar/issues"
+  },
+  "homepage": "https://github.com/maxogden/menubar",
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "extend": "^2.0.0",
+    "menubar": "^9.2.3"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.4",
+    "@electron-forge/maker-deb": "^6.0.4",
+    "@electron-forge/maker-rpm": "^6.0.4",
+    "@electron-forge/maker-squirrel": "^6.0.4",
+    "@electron-forge/maker-zip": "^6.0.4",
+    "electron": "22.0.0",
+    "standard": "^3.2.1"
+  }
+}
